@@ -17,18 +17,93 @@
 //   console.log(`Server running at http://${hostname}:${port}/`);
 // });
 
+document.addEventListener("DOMContentLoaded", function(){
+    const start = document.getElementById('start');
+    const guessEnter = document.getElementById('letterGuess');
+    const guessSubmit = document.getElementById('submitGuess');
+    const word = document.getElementById('wordField');
+    const newGame = new hangMan();
+    const letter = guessEnter.value;
+
+    start.addEventListener("click", function(){
+        start.style.display = "none";
+        guessEnter.removeAttribute("hidden");
+        guessSubmit.removeAttribute("hidden");
+        word.removeAttribute("hidden")
+        newGame.initalizeGame();
+        word.innerHTML = newGame.hiddenWord;
+    })
+
+    //User submits their answer
+    guessSubmit.addEventListener("click",function() {
+        console.log(letter);
+        newGame.checkGuess(letter);
+    });
+    guessEnter.addEventListener("keypress",function(event){
+        if (event.key === "Enter"){
+            console.log(letter);
+            event.preventDefault();
+            newGame.checkGuess(letter);
+        } 
+    });
+
+    
+})
 
 class hangMan{
-    
-    constructor(gameWord) {
-        this.gameWord = gameWord
+    //Generate a random number
+    //Get the word from the array
+    //Hide unguessed letters
+
+    //ask user for a guess
+    //check if guess exist in the word
+    //reveal any instance of the letter
+    //else decrement lives
+
+
+    constructor(currWord, lives, gameStatus) {
+        /*
+        Define the variables for the objects created by this class.
+        */
+        this.currWord = currWord;
+        this.hiddenWord = this.hiddenWord
+        this.wordArr = ['Apple', 'Sunshine', 'Bicycle', 'Ocean', 'Chocolate', 'Adventure', 'Music', 'Moonlight', 'Serendipity', 'Rainbows'];
+        this.lives = lives;
+        this.gameStatus = gameStatus
+    }
+
+    initalizeGame(gameStatus = 'Alive', lives = 5, currWord =this.getWord()){
+        console.log("Game Start");
+        this.getWord();
     }
 
     getWord(){
-        // get random number
-        // get word at index
+        /*
+        Generate an random number and use the number to access an index.
+        */
+        const min = 0
+        const max = this.wordArr.length-1;
+        let randIndex = Math.floor(Math.random() * (max - min) + min);
+        this.currWord = this.wordArr[randIndex];
+        this.hiddenWord = this.hideWord(this.currWord)
+    }
 
-        let randIndex = Math.random() * (max - min) + min;
+    hideWord(wordToGuess){
+        /*
+        hide all letters, only called at beggining of game
+        */
+        let hiddenWord = '';
+
+        for (let index = 0; index < wordToGuess.length; index++) {
+            const element = wordToGuess[index];
+            hiddenWord += '-'
+        }
+    
+        return hiddenWord
+    }
+
+    decemenetLife(params) {
+        
     }
 
     collectGuess(params) {        
@@ -40,81 +115,12 @@ class hangMan{
             // if true
                 // reveal all instances of the letter
             //else
-                // add piece of hangedman 
+                // add piece of hangedman
+        console.log("Checking letter");
     }
 }
 
-// let newGame = new hangMan();
-// newGame.getWord(25)
-
-const wordArr = ['Apple', 'Sunshine', 'Bicycle', 'Ocean', 'Chocolate', 'Adventure', 'Music', 'Moonlight', 'Serendipity', 'Rainbows']
-
-function getWord(){
-    // get random number
-    // get word at index
-    const min = 0;
-    const max = wordArr.length;
-    let randIndex = Math.floor(Math.random() * (max - min) + min);
-
-    return wordArr[randIndex];
-}
-
-function hideWord(wordToGuess){
-    // let wordToGuess = getWord();
-    let hiddenWord = '';
-    // console.log(wordToGuess.length);
-    for (let index = 0; index < wordToGuess.length; index++) {
-        const element = wordToGuess[index];
-        // if letter is revealed, append letter
-        //else hide letter
-        hiddenWord += '_'
-    }
-
-    return hiddenWord
-}
-
-function checkLetter(guess, word, hiddenWord){
-    for (let index = 0; index < word.length; index++) {
-        if (word[index] === guess){
-            return hiddenWord[index] = guess
-        }else{
-            return false
-        }
-    }
-}
-
-function guessWord() {
-    let word = getWord();
-    let hiddenWord = hideWord(word)
-    let lives = 6;
-    let lettersLeft = word.length;
-    let currLetter = ''
-    console.log(word)
-    console.log(hiddenWord)
-    console.log(lettersLeft)
-    //while lives > 0 || while hidden > 0
-    // ask the user to provide a letter
-    // check if the letter has been guessed
-    // if te letter hasn't been guessed, check if the letter is in the string
-    // if the letter is in the string, reveal all instances of the letter
-    // elif the letter is not in the string decrement the lives variables
-
-    while (currLetter.length !== 1){
-        currLetter = prompt("Provide a single letter:")
-    }
-
-    if (checkLetter(currLetter, word, hiddenWord) = false){
-
-    }else{
-        hiddenWord = 
-    }
-    // keep the hidden work in an array
-    // check each letter in word while tracking the current pos
-    //if currLetter matches word[pos], jump to
 
 
-}
 
-// let hiddenWord = hideWord();
-// console.log(hideWord());
-guessWord();
+

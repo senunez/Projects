@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root{
+    --sea-green:#6DA676;
+    --muted-yellow:#F2DE77;
+    --muted-orange:#F2994B;
+    --red-ochre:#A62D12;
+    --warm-black:#311d20;
+}
+body{
+    background-color: var(--muted-yellow);
+    font-family: 'Courier New', monospace;
+    color: var(--warm-black);
+    margin: 0 auto;
+    width: 80%;
+}
+main{
+    text-align: center;
+
+}
+h1{ 
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 5rem;
+}
+h2{
+    
+}
+h3{
+    
+}
+h4{
+    
+}
+h5{
+    
+}
+h6{
+    
+}
+p{
+}
+button{
+    background-color: var(--red-ochre);
+    border: none;
+    color: var(--sea-green);
+}
+button#start{
+    font-size: 4rem;
+    padding: 1rem 2rem;
+}
+button#submitGuess{
+    font-size: 1rem;
+    margin: 2rem;
+    padding: 1rem 2rem;
+}
+button:hover{
+    background-color: var(--sea-green);
+    color:var(--red-ochre);
+}
+button:active{
+    background-color: #F2994B;
+    color: #311d20;
+}
+#wordField{
+    font-size: 8rem;
+}
+#lives{
+    color: #A62D12;
+}
+aside{
+    align-items: center;
+    display:flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+}
+aside p{
+    margin: 1rem;
+}
+label{
+    margin: 3rem;
+    display: block;
+}
+input{
+    display: block;
+    margin: 0 auto;
+}

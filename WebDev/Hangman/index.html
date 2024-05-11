@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resources -->
     <script src="hangman.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="main.css">
+
     <title>Hangman Game</title>
     <main>
-        <h1>Counter</h1>
-        <h2 id="wordField">Word</h2>
+        <h1>Guess the word</h1>
+        <p>Press the Start button to begin playing!</p>
+        <button type="submit" id="start" name="start">START</button>
+        <h2 id="wordField" hidden></h2>
+        <label for="letterGuess">Guess a letter from A to Zed</label>
+        <input type="text" name="letterGuess" id="letterGuess" min="1" max="1" hidden>
+        <button type="submit" id="submitGuess" name="submitGuess" hidden>Submit Guess</button>
+        <h2 hidden>Lives: <span id="lives">5</span></h2>
     </main>
+    <aside>
+        <p>A</p>
+        <p>B</p>
+        <p>C</p>
+        <p>D</p>
+        <p>E</p>
+        <p>F</p>
+        <p>G</p>
+        <p>H</p>
+        <p>I</p>
+        <p>J</p>
+    </aside>
 </head>
 <body>
     
