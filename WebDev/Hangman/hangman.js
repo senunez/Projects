@@ -18,34 +18,43 @@
 // });
 
 document.addEventListener("DOMContentLoaded", function(){
+    let letter
+    let revealed
     const start = document.getElementById('start');
     const guessEnter = document.getElementById('letterGuess');
     const guessSubmit = document.getElementById('submitGuess');
     const word = document.getElementById('wordField');
-    const newGame = new hangMan();
-    const letter = guessEnter.value;
+    const newGame = new hangMan(revealed);
 
+
+
+
+    // User starts the game
     start.addEventListener("click", function(){
         start.style.display = "none";
         guessEnter.removeAttribute("hidden");
         guessSubmit.removeAttribute("hidden");
         word.removeAttribute("hidden")
-        newGame.initalizeGame();
+        revealed = newGame.initalizeGame();
         word.innerHTML = newGame.hiddenWord;
     })
 
-    //User submits their answer
+    //User submits their answer with submit button
     guessSubmit.addEventListener("click",function() {
-        console.log(letter);
-        newGame.checkGuess(letter);
+        letter = document.getElementById('letterGuess').value;
+        revealed = newGame.checkGuess(letter, revealed);
+        word.innerHTML = revealed
+        
     });
-    guessEnter.addEventListener("keypress",function(event){
-        if (event.key === "Enter"){
-            console.log(letter);
-            event.preventDefault();
-            newGame.checkGuess(letter);
-        } 
-    });
+
+    //User Uses the Enter key
+    // guessEnter.addEventListener("keypress",function(event){
+    //     letter = document.getElementById('letterGuess').value;
+    //     if (event.key === "Enter"){
+    //         event.preventDefault();
+    //         newGame.checkGuess(letter);
+    //     } 
+    // });
 
     
 })
@@ -54,27 +63,28 @@ class hangMan{
     //Generate a random number
     //Get the word from the array
     //Hide unguessed letters
-
     //ask user for a guess
+    
     //check if guess exist in the word
     //reveal any instance of the letter
     //else decrement lives
 
 
-    constructor(currWord, lives, gameStatus) {
+    constructor(currWord, lives, gameStatus, hiddenWord) {
         /*
         Define the variables for the objects created by this class.
         */
         this.currWord = currWord;
-        this.hiddenWord = this.hiddenWord
+        this.hiddenWord = hiddenWord;
         this.wordArr = ['Apple', 'Sunshine', 'Bicycle', 'Ocean', 'Chocolate', 'Adventure', 'Music', 'Moonlight', 'Serendipity', 'Rainbows'];
         this.lives = lives;
         this.gameStatus = gameStatus
     }
 
-    initalizeGame(gameStatus = 'Alive', lives = 5, currWord =this.getWord()){
+    initalizeGame(currWord =this.getWord(), gameStatus = 'Alive', lives = 5, ){
         console.log("Game Start");
-        this.getWord();
+        this.lives = lives;
+        return this.getWord();
     }
 
     getWord(){
@@ -86,37 +96,61 @@ class hangMan{
         let randIndex = Math.floor(Math.random() * (max - min) + min);
         this.currWord = this.wordArr[randIndex];
         this.hiddenWord = this.hideWord(this.currWord)
+        return this.hiddenWord
     }
 
-    hideWord(wordToGuess){
+    hideWord(currWord){
         /*
         hide all letters, only called at beggining of game
         */
-        let hiddenWord = '';
 
-        for (let index = 0; index < wordToGuess.length; index++) {
-            const element = wordToGuess[index];
-            hiddenWord += '-'
+        // for (const pos in currWord) {
+        //         this.hiddenWord = '-';
+        //     }
+        let modString = ''
+        for (const key in currWord) {
+            modString = modString + '-';
         }
-    
-        return hiddenWord
+        this.hiddenWord = modString;
+        return this.hiddenWord;
     }
 
-    decemenetLife(params) {
-        
+    decLife() {
+        this.lives -= 1;
     }
 
     collectGuess(params) {        
     }
 
-    checkGuess(params) {
-                // check if letter is in word
+    checkGuess(letter, revealed) {
 
-            // if true
-                // reveal all instances of the letter
-            //else
-                // add piece of hangedman
-        console.log("Checking letter");
+
+        let modString = ''
+        console.log(this.currWord);
+        console.log(revealed)
+
+        for (let index = 0; index < this.currWord.length; index++) {
+            console.log(this.hiddenWord);
+            if (letter === this.currWord[index]) {
+                modString += letter;
+            }else if (this.currWord[index] === revealed[index]) {
+                console.log("reveladed letter")
+                modString += revealed[index];
+            }else{
+                modString += '-';
+            }
+            this.hiddenWord = modString
+        }
+
+        
+
+        return this.hiddenWord;
+
+        // console.log(this.hiddenWord);
+        // if (matchesCount.length == 0) {
+        //     // decemement life
+        //     this.decLife()
+        // }
     }
 }
 

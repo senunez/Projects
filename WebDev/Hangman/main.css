@@ -23,7 +23,7 @@ h1{
     font-size: 5rem;
 }
 h2{
-    
+    font-size: 3rem !important;
 }
 h3{
     
@@ -67,14 +67,14 @@ button:active{
 #lives{
     color: #A62D12;
 }
-aside{
+footer{
     align-items: center;
     display:flex;
     flex-direction: row;
     margin: 0 auto;
     width: 100%;
 }
-aside p{
+footer p{
     margin: 1rem;
 }
 label{
