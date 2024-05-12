@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function(){
     const guessEnter = document.getElementById('letterGuess');
     const guessSubmit = document.getElementById('submitGuess');
     const word = document.getElementById('wordField');
-    const newGame = new hangMan(revealed);
+    let lives = document.getElementById('lives');
+    const newGame = new hangMan();
 
 
 
@@ -34,27 +35,36 @@ document.addEventListener("DOMContentLoaded", function(){
         start.style.display = "none";
         guessEnter.removeAttribute("hidden");
         guessSubmit.removeAttribute("hidden");
+        lives.removeAttribute("hidden")
         word.removeAttribute("hidden")
-        revealed = newGame.initalizeGame();
-        word.innerHTML = newGame.hiddenWord;
+        newGame.initalizeGame();
+        revealed = newGame.hiddenWord;
+        word.innerHTML = revealed;
+        
+        console.log(newGame.currWord)
     })
 
     //User submits their answer with submit button
-    guessSubmit.addEventListener("click",function() {
-        letter = document.getElementById('letterGuess').value;
-        revealed = newGame.checkGuess(letter, revealed);
-        word.innerHTML = revealed
-        
-    });
-
-    //User Uses the Enter key
-    // guessEnter.addEventListener("keypress",function(event){
+    // guessSubmit.addEventListener("click",function() {
     //     letter = document.getElementById('letterGuess').value;
-    //     if (event.key === "Enter"){
-    //         event.preventDefault();
-    //         newGame.checkGuess(letter);
-    //     } 
+    //     revealed = newGame.checkGuess(letter, revealed);
+    //     word.innerHTML = revealed;
+    //     lives = revealed
+        
     // });
+
+    // User Uses the Enter key
+    guessEnter.addEventListener("keypress",function(event){
+        letter = document.getElementById('letterGuess').value;
+        if (event.key === "Enter"){
+            event.preventDefault();
+            newGame.checkGuess(letter, revealed);
+            revealed = newGame.hiddenWord;
+            word.innerHTML = revealed;
+            lives.innerHTML = newGame.lives;
+            guessEnter.value = ""
+        } 
+    });
 
     
 })
@@ -76,7 +86,7 @@ class hangMan{
         */
         this.currWord = currWord;
         this.hiddenWord = hiddenWord;
-        this.wordArr = ['Apple', 'Sunshine', 'Bicycle', 'Ocean', 'Chocolate', 'Adventure', 'Music', 'Moonlight', 'Serendipity', 'Rainbows'];
+        this.wordArr = ['apple', 'sunshine', 'bicycle', 'ocean', 'chocolate', 'adventure', 'music', 'moonlight', 'serendipity', 'rainbows'];
         this.lives = lives;
         this.gameStatus = gameStatus
     }
@@ -123,11 +133,7 @@ class hangMan{
     }
 
     checkGuess(letter, revealed) {
-
-
         let modString = ''
-        console.log(this.currWord);
-        console.log(revealed)
 
         for (let index = 0; index < this.currWord.length; index++) {
             console.log(this.hiddenWord);
@@ -138,13 +144,14 @@ class hangMan{
                 modString += revealed[index];
             }else{
                 modString += '-';
+                this.decLife();
             }
             this.hiddenWord = modString
         }
 
         
-
-        return this.hiddenWord;
+        //return the hiddenWord and the value
+        // return [this.hiddenWord, this.lives];
 
         // console.log(this.hiddenWord);
         // if (matchesCount.length == 0) {

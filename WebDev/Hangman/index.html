@@ -16,21 +16,12 @@
         <button type="submit" id="start" name="start">START</button>
         <h2 id="wordField" hidden></h2>
         <label for="letterGuess">Guess a letter from A to Zed</label>
-        <input type="text" name="letterGuess" id="letterGuess" min="1" max="1"  hidden>
+        <input type="text" name="letterGuess" id="letterGuess" minlength="1" maxlength="1" pattern="[A-Za-z]+" autofocus hidden >
         <button type="submit" id="submitGuess" name="submitGuess" hidden>Submit Guess</button>
-        <h2 hidden>Lives: <span id="lives">5</span></h2>
+        <h2 id="lives" hidden>Lives: <span id="totalLives">5</span></h2>
     </main>
     <footer>
-        <p>A</p>
-        <p>B</p>
-        <p>C</p>
-        <p>D</p>
-        <p>E</p>
-        <p>F</p>
-        <p>G</p>
-        <p>H</p>
-        <p>I</p>
-        <p>J</p>
+        <p>Add used letters here. Also add condition to prevent resusing letters.</p>
     </footer>
 </head>
 <body>
