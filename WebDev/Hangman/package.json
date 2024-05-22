@@ -1,0 +1,14 @@
+{
+  "name": "Guess-the-word",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Guess the word game with imported word-list module.",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "word-list": "^4.0.0"
+  }
+}

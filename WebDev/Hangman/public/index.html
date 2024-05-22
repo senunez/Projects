@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Resources -->
+    <script type="module" src="hangman.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="main.css">
+
+    <title>Hangman Game</title>
+    <main>
+        <h1>Guess the word</h1>
+        <p id="instructions">Press the Start button to begin playing!</p>
+        <button type="submit" id="start" name="start">START</button>
+        <h2 id="wordField" hidden></h2>
+        <!-- <label for="letterGuess">Guess a letter from A to Zed</label> -->
+        <input type="text" name="letterGuess" id="letterGuess" minlength="1" maxlength="1" pattern="[A-Za-z]+" autofocus hidden >
+        <button type="submit" id="submitGuess" name="submitGuess" hidden>Submit Guess</button>
+        <button type="reset" id="restartGame" name="restartGame" hidden>New Game</button>
+        <h2 id="lives" hidden>Lives: <span id="totalLives" >5</span></h2>
+    </main>
+    <footer>
+        <p id="usedLetter"></p>
+    </footer>
+</head>
+<body>
+    
+</body>
+</html>
