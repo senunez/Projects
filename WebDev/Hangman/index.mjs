@@ -11,7 +11,7 @@ import fs from 'fs';
 // Load the words from the word-list file
 export const words = fs.readFileSync(wordList, 'utf8').split('\n');
 
-// Print the first 10 words
+// Print the first 10 words to check its working
 console.log(words.slice(0, 10));
 
 app.get('/start', (req, res) => {

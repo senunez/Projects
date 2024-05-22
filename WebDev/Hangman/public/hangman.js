@@ -25,77 +25,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
-// Remove/Add Hidden Attributes 
+//clean up check if letter was used /check guess
+//implement module for word list
 
 
-
-// let words
-// let WORDS_LENGTH
-// document.addEventListener("DOMContentLoaded", function(){
-//     let letter
-//     let revealed
-//     let restart = document.getElementById('restartGame');
-//     let lives = document.getElementById('totalLives');
-//     const start = document.getElementById('start');
-//     const guessEnter = document.getElementById('letterGuess');
-//     const guessSubmit = document.getElementById('submitGuess');
-//     const word = document.getElementById('wordField');
-//     const newGame = new wordGame();
-
-//     start.addEventListener("click", function(){
-//         fetch('/start')
-//         .then(response => response.json())
-//         .then(data => {
-//             words = data
-//             console.log(words.array[50])
-//             console.log(words.array.length);
-//             WORDS_LENGTH = words.array.length
-//         })
-//         // User starts the game
-//         // Hide and unhide respective tags
-//         start.setAttribute('hidden', true);
-//         guessEnter.removeAttribute("hidden");
-//         guessSubmit.removeAttribute("hidden");
-//         lives.removeAttribute("hidden")
-//         word.removeAttribute("hidden")
-//         newGame.initalizeGame();
-
-//         //Hide and render the word in the browser
-//         revealed = newGame.hiddenWord;
-//         word.innerHTML = revealed;
-        
-//         // console.log(newGame.currWord)
-//     })
-
-//     //User submits their answer with submit button
-//     // guessSubmit.addEventListener("click",function() {
-//     //     letter = document.getElementById('letterGuess').value;
-//     //     revealed = newGame.checkGuess(letter, revealed);
-//     //     word.innerHTML = revealed;
-//     //     lives = revealed
-        
-//     // });
-
-//     // User Uses the Enter key
-    // guessEnter.addEventListener("keypress",function(event){
-    //     letter = document.getElementById('letterGuess').value;
-    //     if (event.key === "Enter"){
-    //         event.preventDefault();
-    //         newGame.checkGuess(letter, revealed);
-    //         revealed = newGame.hiddenWord;
-    //         word.innerHTML = revealed;
-    //         lives.innerHTML = newGame.lives;
-    //         guessEnter.value = ""
-    //     }
-    //     if (newGame.gameStatus === 'DEAD') {
-    //         guessSubmit.setAttribute('hidden', true);
-    //         guessEnter.setAttribute('hidden', true);
-    //         start.removeAttribute('hidden');
-    //     }
-    // });
-
-    
-// })
 
 class wordGame{
     constructor(currWord, lives, gameStatus, hiddenWord) {
@@ -210,19 +143,20 @@ class wordGame{
         }
 
         if (this.lives === 0) {
+            this.hiddenWord = 'Game Over';
+            this.gameOver();
+        }else if(this.hiddenWord === this.currWord){
+            this.hiddenWord = 'WINNER!!!'
             this.gameOver();
         }else{
             document.getElementById('wordField').innerHTML = this.hiddenWord;
             document.getElementById('letterGuess').focus();
             document.getElementById('letterGuess').value = '';
-            // return this.hiddenWord
         }
     }
 
 
     gameOver(){
-        this.hiddenWord = 'Game Over';
-        this.gameStatus = 'DEAD';
         this.lives = 5;
         this.usedLetterArr = []
         document.getElementById('wordField').innerHTML = this.hiddenWord;
@@ -230,10 +164,6 @@ class wordGame{
         document.getElementById('start').removeAttribute('hidden');                 // start button
         document.getElementById('submitGuess').setAttribute('hidden', true);        // submit button
         document.getElementById('lives').setAttribute('hidden', true);              // lives counter
-
-        // document.getElementById('wordField').removeAttribute('hidden');        // word to guess - hidden
-    }
-    winner(){
-        
+        document.getElementById('letterGuess').value = '';
     }
 }
